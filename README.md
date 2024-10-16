@@ -1,3 +1,8 @@
 ## 실전! 스프링 부트와 JPA 활용 1
 - 소스코드 저장 목적
-- H2 -> mysql 데이터베이스 사용
+
+
+### DB 환경 설정
+https://www.h2database.com/html/download.html
+
+
