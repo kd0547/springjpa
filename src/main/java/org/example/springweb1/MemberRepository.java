@@ -2,6 +2,7 @@ package org.example.springweb1;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.example.springweb1.domain.Member;
 import org.springframework.stereotype.Repository;
 
 @Repository
