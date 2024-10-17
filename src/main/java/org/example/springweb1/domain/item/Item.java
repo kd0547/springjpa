@@ -27,4 +27,24 @@ public class Item {
     @ManyToMany(mappedBy = "itmes")
     private List<Category> categories = new ArrayList<>();
 
+
+    /*
+    *  재고 증가
+    * */
+    public void addStore(int quantity) {
+        this.stockQuantity += stockQuantity;
+    }
+
+    /**
+     * 재고 감소
+     * @param quantity
+     */
+    public void removeStore(int quantity) {
+        int resultStock = this.stockQuantity - quantity;
+        if (resultStock < 0) {
+            throw new NotEnuoughStockException("need more stock");
+        }
+        this.stockQuantity = resultStock;
+    }
+
 }
