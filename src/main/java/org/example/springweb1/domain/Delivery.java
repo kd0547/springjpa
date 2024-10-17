@@ -13,7 +13,7 @@ public class Delivery {
     private Long id;
 
     @OneToOne(mappedBy = "delivery")
-    private Order order;
+    private Order orders;
 
     @Enumerated
     private Address address;

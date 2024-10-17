@@ -9,6 +9,7 @@ import org.example.springweb1.domain.item.Item;
 @Getter @Setter
 public class OrderItem {
     @Id @GeneratedValue
+    @Column(name = "order_item_id")
     private Long id;
 
     @ManyToOne
@@ -17,7 +18,7 @@ public class OrderItem {
 
     @ManyToOne
     @JoinColumn(name = "order_id")
-    private Order order;
+    private Order orders;
 
     private int orderPrice; //주문 가격
 

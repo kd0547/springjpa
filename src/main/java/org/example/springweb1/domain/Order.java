@@ -21,11 +21,11 @@ public class Order {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "order")
-    private List<OrderItem> orderItemList = new ArrayList<>();
+    @OneToMany(mappedBy = "orders")
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     @OneToOne
-    @JoinColumn(name = "order")
+    @JoinColumn(name = "orders")
     private Delivery delivery;
 
     private LocalDateTime orderDate; //주문 시간
