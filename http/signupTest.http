@@ -1,0 +1,62 @@
+### 정상 작동 테스트
+POST {{api}}/api/v1/members
+Content-Type: application/json
+
+{
+  "username": "kim"
+}
+
+### 에러 테스트
+POST {{api}}/api/v1/members
+Content-Type: application/json
+
+### 회원가입 -> 회원 정보 변경
+POST {{api}}/api/v2/members
+Content-Type: application/json
+
+{
+  "username": "kim14"
+}
+> {%
+client.test("createMember",function (){
+    client.log(response.status);
+
+    client.assert(response.status === 200,"Response status is not 200");
+    client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json'");
+    client.log(response.body)
+
+    client.log(response.body.username);
+    client.global.set("id",response.body.id);
+
+})
+ %}
+
+### 회원정보 변경 성공 (중복 이름 없음)
+PUT {{api}}/api/v2/members/{{id}}
+Content-Type: application/json
+
+{
+  "id" : {{id}},
+  "username" : "kim1"
+}
+> {%
+    client.test("updateUsername",function (){
+        client.log(response.status);
+        client.assert(response.status === 200);
+    })
+%}
+
+### 회원정보 변경 실패 (중복 유저 이름 사용)
+PUT {{api}}/api/v2/members/{{id}}
+Content-Type: application/json
+
+{
+  "id" : {{id}},
+  "username" : "kim"
+}
+> {%
+    client.test("ValidDuplicateUsername",function (){
+        client.log(response.status);
+        client.assert(response.status === 500);
+    })
+%}

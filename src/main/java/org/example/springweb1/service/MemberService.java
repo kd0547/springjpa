@@ -50,4 +50,13 @@ public class MemberService {
     }
 
 
+    @Transactional
+    public void update(Long id, String username) {
+        Member findMember = memberRepository.findMember(id);
+        List<Member> members= memberRepository.findByNames(username);
+        if(!members.isEmpty()) {
+            throw new IllegalArgumentException("이미 존재하는 회원입니다.");
+        }
+        findMember.setUsername(username);
+    }
 }
