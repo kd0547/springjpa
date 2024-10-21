@@ -32,7 +32,7 @@ public class Item {
     *  재고 증가
     * */
     public void addStore(int quantity) {
-        this.stockQuantity += stockQuantity;
+        this.stockQuantity += quantity;
     }
 
     /**
