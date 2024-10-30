@@ -9,6 +9,8 @@ import org.example.springweb1.domain.Member;
 import org.example.springweb1.service.MemberService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class MemberApiController {
@@ -20,6 +22,38 @@ public class MemberApiController {
         Long memberId = memberService.join(member);
         return new CreateMemberResponse(memberId);
     }
+
+    /**
+     * 회원 정보를 반환
+     * @return
+     */
+    @GetMapping("/api/v1/members")
+    public List<Member> Memberlist() {
+        return memberService.findMembers();
+    }
+
+    @GetMapping("/api/v2/members")
+    public Result memberListV2() {
+        List<Member> findmembers = memberService.findMembers();
+        List<MemberDto> memberDtoList= findmembers.stream()
+                .map(member -> new MemberDto(member.getUsername()))
+                .toList();
+
+        return new Result<>(memberDtoList);
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class Result<T> {
+        private T data;
+    }
+    @Data
+    @AllArgsConstructor
+    static class MemberDto {
+        private String username;
+    }
+
+
 
     /**
      * 회원 가입
